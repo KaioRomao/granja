@@ -1,0 +1,88 @@
+Checklist
+Legenda: ✅ feito | ⬜ pendente
+
+Requisitos Funcionais
+
+1) Cadastro de Patos
+- ✅ Cada pato deve ser cadastrado individualmente no sistema.
+- ✅ Durante o cadastro, deve ser indicada a “mãe” de cada pato (para melhor rastreamento).
+
+2) Cadastro de Clientes
+- ✅ Clientes podem ser cadastrados no sistema.
+- ✅ Cada cliente deve ter uma indicação se ele é elegível para desconto ou não (com/sem desconto).
+
+3) Cadastro de Vendedores
+- ✅ O vendedor deve ser identificado por CPF válido, Nome e Matrícula.
+- ✅ Não devem existir vendedores com o mesmo CPF e matrícula.
+- ✅ Não deve ser possível excluir vendedores que já realizaram vendas.
+
+4) Venda de Patos
+- ✅ Deve ser possível registrar a venda de um ou mais patos ao mesmo tempo para um cliente cadastrado.
+- ✅ Se o cliente for elegível para desconto, aplicar 20% de desconto no valor total da venda.
+- ✅ A data da venda deve ser registrada automaticamente.
+- ✅ Não deve ser possível realizar a venda do mesmo pato mais de uma vez.
+- ✅ O vendedor da venda deve ser identificado.
+
+5) Listagem de Patos Vendidos
+- ✅ Listar todos os patos vendidos, incluindo:
+- ✅ data da venda
+- ✅ valor
+- ✅ cliente para quem foi vendido
+
+6) Geração de Relatórios
+- ✅ Relatórios devem incluir informações detalhadas sobre:
+- ✅ patos cadastrados
+- ✅ patos vendidos
+- ✅ transações (identificando o vendedor que realizou a venda)
+
+7) Ranking de Vendedores
+- ✅ Apresentar vendedores que se destacaram por:
+- ✅ maior número de vendas ou
+- ✅ maior valor total vendido
+- ✅ Permitir filtro:
+- ✅ por período das vendas
+- ✅ pelo status de venda do pato
+
+---
+
+Funcionalidades da API (Endpoints)
+
+- ✅ Cadastro de Patos: endpoint para cadastrar patos (nome e mãe).
+- ✅ Cadastro de Clientes: endpoint para cadastrar clientes (nome e elegibilidade para desconto).
+- ✅ Cadastro de Vendedores: endpoints para cadastrar e listar/pesquisar vendedores.
+- ✅ Registro de Vendas: endpoint para registrar vendas (com desconto, data automática).
+- ✅ Listagem de Patos Vendidos: endpoint para listar patos vendidos com detalhes da transação.
+- ✅ Geração de Relatórios: endpoints para gerar e baixar relatórios em Excel.
+- ✅ Ranking de Vendedores: endpoints para retornar ranking com filtros.
+
+---
+
+Tecnologias Utilizadas (esperadas)
+- ✅ Java
+- ✅ Spring Boot
+- ✅ JPA/Hibernate
+- ✅ MySQL/PostgreSQL (configurado/rodando como banco principal)
+- ✅ Apache POI (Excel)
+
+---
+
+Regras de Preço
+- ✅ Pato com 1 filho: R$ 50,00
+- ✅ Pato com 2 filhos: R$ 25,00
+- ✅ Pato sem filhos: R$ 70,00
+
+---
+
+Instruções de Entrega
+- ⬜ Elaborar um cronograma (atividades + estimativa em horas) e modelagem do banco antes de iniciar.
+- ✅ Disponibilizar o código no GitHub/GitLab *(marque como feito só se você já subiu mesmo)*.
+- ✅ Descrever no README:
+- ✅ tecnologias utilizadas
+- ✅ passos para iniciar a API
+
+---
+
+Diferenciais (opcionais)
+- ✅ Docker
+- ✅ Migrações de banco (Flyway/Liquibase/etc.)
+- ⬜ Testes unitários

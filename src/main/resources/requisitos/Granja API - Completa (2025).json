@@ -1,0 +1,989 @@
+{
+  "info": {
+    "name": "Granja API - Completa (2025)",
+    "description": "Collection completa para testar Patos, Clientes, Vendedores, Vendas, Patos Vendidos, Ranking e Relatório Excel. Usa Collection Variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "02 - Clientes",
+      "item": [
+        {
+          "name": "02.1 POST /clientes (COM desconto) -> salva clienteComDescontoId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/clientes",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clientes"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nmCliente\": \"Cliente com desconto\",\n  \"stValidoDesconto\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('clienteComDescontoId', b.id);",
+                  "test('clienteComDescontoId salvo', () => expect(bru.getVar('clienteComDescontoId')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02.2 POST /clientes (SEM desconto) -> salva clienteSemDescontoId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/clientes",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clientes"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nmCliente\": \"Cliente sem desconto\",\n  \"stValidoDesconto\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('clienteSemDescontoId', b.id);",
+                  "test('clienteSemDescontoId salvo', () => expect(bru.getVar('clienteSemDescontoId')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02.3 GET /clientes (pesquisar) [params obrigatórios no seu controller]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/clientes?id&nmPato&stValidoDesconto=true",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clientes?id&nmPato&stValidoDesconto=true"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": ""
+                },
+                {
+                  "key": "nmPato",
+                  "value": ""
+                },
+                {
+                  "key": "stValidoDesconto",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 - Vendedores",
+      "item": [
+        {
+          "name": "03.1 POST /vendedores -> salva vendedorId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendedores",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nmVendedor\": \"Paulo Henrique\",\n  \"dsCpf\": \"25257162059\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('vendedorId', b.id);",
+                  "test('vendedorId salvo', () => expect(bru.getVar('vendedorId')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03.2 GET /vendedores (pesquisar) [params obrigatórios no seu controller]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendedores?id=1&nmVendedor&dsCpf&dsMatricula",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores?id=1&nmVendedor&dsCpf&dsMatricula"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                },
+                {
+                  "key": "nmVendedor",
+                  "value": ""
+                },
+                {
+                  "key": "dsCpf",
+                  "value": ""
+                },
+                {
+                  "key": "dsMatricula",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "03.3 DELETE /vendedores/{{vendedorId}} (excluir) - pode falhar se já vendeu",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendedores/{{vendedorId}}",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendedores",
+                "{{vendedorId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Patos",
+      "item": [
+        {
+          "name": "01.1 POST /patos (criar PATO MÃE)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"nmPato\": \"Pato Mae\",\n  \"patoMaeId\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('patoMaeId', b.id);",
+                  "test('patoMaeId salvo', () => expect(bru.getVar('patoMaeId')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "01.2 POST /patos (criar PATO FILHO) -> salva patoId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"nmPato\": \"Pato Filho\",\n  \"patoMaeId\": {{patoMaeId}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('patoId', b.id);",
+                  "test('patoId salvo', () => expect(bru.getVar('patoId')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "01.3 POST /patos (criar PATO EXTRA) -> salva patoId2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"nmPato\": \"Pato Extra\",\n  \"patoMaeId\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('patoId2', b.id);",
+                  "test('patoId2 salvo', () => expect(bru.getVar('patoId2')).to.be.ok);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "01.4 GET /patos (pesquisar)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos?id&nmPato&idPatoMae",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos?id&nmPato&idPatoMae"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": ""
+                },
+                {
+                  "key": "nmPato",
+                  "value": ""
+                },
+                {
+                  "key": "idPatoMae",
+                  "value": ""
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "01.5 GET /patos/{{patoId}} (buscar por id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos/{{patoId}}",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos",
+                "{{patoId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "01.6 PUT /patos/{{patoId2}} (atualizar nome)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos/{{patoId2}}",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos",
+                "{{patoId2}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"nmPato\": \"Pato Filho\",\n  \"patoMaeId\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "01.7 DELETE /patos/{{patoMaeId}} (desativar)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos/{{patoMaeId}}",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos",
+                "{{patoMaeId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "01.8 GET /patos/vendidos (listar patos vendidos)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/patos/vendidos",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "patos",
+                "vendidos"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 - Vendas",
+      "item": [
+        {
+          "name": "04.1 POST /vendas (VENDA com desconto) -> salva vendaId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": {{clienteComDescontoId}},\n  \"idVendedor\": {{vendedorId}},\n  \"idPatoList\": [{{patoId}}]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "bru.setVar('vendaId', b.id);",
+                  "test('vendaId salvo', () => expect(bru.getVar('vendaId')).to.be.ok);",
+                  "test('dtVenda existe', () => expect(b.dtVenda).to.exist);",
+                  "test('desconto aplicado (cliente elegível)', () => expect(b.stDescontoAplicado).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04.2 POST /vendas (tentar vender o MESMO pato de novo - deve falhar)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": {{clienteComDescontoId}},\n  \"idVendedor\": {{vendedorId}},\n  \"idPatoList\": [{{patoId}}]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Deve falhar (4xx/5xx)', () => expect(res.getStatus()).to.be.oneOf([400, 409, 422, 500]));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04.3 POST /vendas (VENDA sem desconto) [usa patoId2]",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": {{clienteSemDescontoId}},\n  \"idVendedor\": {{vendedorId}},\n  \"idPatoList\": [{{patoId2}}]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "test('Status 201', () => expect(res.getStatus()).to.equal(201));",
+                  "const b = res.getBody();",
+                  "test('desconto NÃO aplicado (cliente não elegível)', () => expect(b.stDescontoAplicado).to.eql(false));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "00 - Health/Info",
+      "item": [
+        {
+          "name": "Base URL (manual check)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}/"
+              ],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 - Ranking e Relatório",
+      "item": [
+        {
+          "name": "06.2 GET /vendas/ranking-vendedores (por qtde) [se existir no seu projeto]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas/ranking?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}&statusVendaPato=VENDIDO&ordenacao=QTDE",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "ranking?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}&statusVendaPato=VENDIDO&ordenacao=QTDE"
+              ],
+              "query": [
+                {
+                  "key": "dtInicial",
+                  "value": "{{dtInicial}}"
+                },
+                {
+                  "key": "dtFinal",
+                  "value": "{{dtFinal}}"
+                },
+                {
+                  "key": "statusVendaPato",
+                  "value": "VENDIDO"
+                },
+                {
+                  "key": "ordenacao",
+                  "value": "QTDE"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "06.3 GET /vendas/relatorio/excel (download)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas/relatorio/excel?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "relatorio",
+                "excel?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}"
+              ],
+              "query": [
+                {
+                  "key": "dtInicial",
+                  "value": "{{dtInicial}}"
+                },
+                {
+                  "key": "dtFinal",
+                  "value": "{{dtFinal}}"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "06.1 GET /vendas/ranking-vendedores (por valor) [se existir no seu projeto]",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{baseUrl}}/vendas/ranking?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}&statusVendaPato=VENDIDO&ordenacao=VALOR",
+              "protocol": "",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "vendas",
+                "ranking?dtInicial={{dtInicial}}&dtFinal={{dtFinal}}&statusVendaPato=VENDIDO&ordenacao=VALOR"
+              ],
+              "query": [
+                {
+                  "key": "dtInicial",
+                  "value": "{{dtInicial}}"
+                },
+                {
+                  "key": "dtFinal",
+                  "value": "{{dtFinal}}"
+                },
+                {
+                  "key": "statusVendaPato",
+                  "value": "VENDIDO"
+                },
+                {
+                  "key": "ordenacao",
+                  "value": "VALOR"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "default"
+    },
+    {
+      "key": "patoMaeId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "patoId",
+      "value": "1",
+      "type": "default"
+    },
+    {
+      "key": "patoId2",
+      "value": "2",
+      "type": "default"
+    },
+    {
+      "key": "clienteComDescontoId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "clienteSemDescontoId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "vendedorId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "vendedorCpf",
+      "value": "25257162059",
+      "type": "default"
+    },
+    {
+      "key": "vendaId",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "dtInicial",
+      "value": "01/01/2026",
+      "type": "default"
+    },
+    {
+      "key": "dtFinal",
+      "value": "31/12/2026",
+      "type": "default"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "// Gera um CPF 'diferente' a cada execução (não garante CPF válido, mas evita duplicidade no teste)",
+          "const cpf = String(Date.now()).slice(-11).padStart(11, '0');",
+          "bru.setVar('vendedorCpf', cpf);"
+        ]
+      }
+    }
+  ]
+}
